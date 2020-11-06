@@ -45,8 +45,11 @@ const dramaRatesSum = (array) => array.filter (elemento => elemento.rate > 0).re
 
 function orderByYear(array) {
   const orderedMovies = array.sort((a, b) => {
-     return a.year - b.year;
- });
+
+    if (a.year > b.year) return 1;
+    if (a.year < b.year) return -1;
+    if (a.title > b.title) return 1;
+    if (a.title < b.title) return -1; });
 
    return orderedMovies
  }
@@ -59,6 +62,17 @@ function orderByYear(array) {
   }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
+
+function turnHoursToMinutes(array) {
+  return array.map(movie => {
+        const newMovieArray = {movie};
+          if (movie.duration.includes('h')) {
+            newMovieArray.duration = parseInt(movie.duration.slice(0,2)) * 60 + parseInt(movie.duration.slice(3, 5) || 0);
+          }   else {
+            newMovieArray.duration = Number(movie.duration.slice(0,2));
+          }   return newMovieArray;
+      });
+};
 
 
 
